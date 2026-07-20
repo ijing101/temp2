@@ -3,18 +3,18 @@
         {
             "name": "Template",
             "includePath": [
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\USER\\BSP",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\USER\\APP",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\USER\\Hardware",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\CORE",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\STM32F10x_FWLib\\inc",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\SYSTEM\\delay",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\SYSTEM\\sys",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\SYSTEM\\usart",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\USER\\BSP",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\USER\\APP",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\USER\\Hardware",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\CORE",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\STM32F10x_FWLib\\inc",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\SYSTEM\\delay",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\SYSTEM\\sys",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\SYSTEM\\usart",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app\\STM32F10x_FWLib\\src",
-                "g:\\bootloader\\温湿度v6.0\\appv6.0\\app5.6\\app"
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app\\STM32F10x_FWLib\\src",
+                "d:\\GitHub\\temp2\\temp2\\温湿度气压MS8607\\appv6.2\\app"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",
