@@ -15,7 +15,7 @@ int main(void)
 	SCB->VTOR = FLASH_BASE | 0x5000;
 	__enable_irq(); 
 
-	HSE_SetSysClock(RCC_PLLMul_4);  //璁剧疆绯荤粺鏃堕挓涓猴細8MHZ * 4 = 32MHZ
+	HSE_SetSysClock(RCC_PLLMul_4);  //8MHZ * 4 = 32MHZ
 	delay_init();
 	MS8607_IIC_Config();
 	uart_init(115200);//usart1
