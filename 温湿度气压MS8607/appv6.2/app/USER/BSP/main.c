@@ -25,7 +25,7 @@ int main(void)
 	delay_ms(500);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
-	Modbus_uart2_init(9600);//485鍒濆鍖栵紙涓存椂浣跨敤9600锛?
+	Modbus_uart2_init(9600);//默认9600
 	TIM3_Int_Init(1000-1,32-1);//modbus 1ms
 	TIM4_Int_Init(1000-1,32-1);//MMsec 1ms
 	Usart2_SendString("app V6.2\r\n");
