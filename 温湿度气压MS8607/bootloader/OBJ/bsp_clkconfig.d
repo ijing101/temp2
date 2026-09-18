@@ -2,7 +2,7 @@
 ..\obj\bsp_clkconfig.o: bsp_clkconfig.h
 ..\obj\bsp_clkconfig.o: stm32f10x.h
 ..\obj\bsp_clkconfig.o: ..\CORE\core_cm3.h
-..\obj\bsp_clkconfig.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\bsp_clkconfig.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\bsp_clkconfig.o: system_stm32f10x.h
 ..\obj\bsp_clkconfig.o: stm32f10x_conf.h
 ..\obj\bsp_clkconfig.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h

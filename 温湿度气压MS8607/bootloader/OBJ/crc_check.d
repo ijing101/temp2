@@ -2,7 +2,7 @@
 ..\obj\crc_check.o: crc_check.h
 ..\obj\crc_check.o: stm32f10x.h
 ..\obj\crc_check.o: ..\CORE\core_cm3.h
-..\obj\crc_check.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\crc_check.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\crc_check.o: system_stm32f10x.h
 ..\obj\crc_check.o: stm32f10x_conf.h
 ..\obj\crc_check.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -30,11 +30,5 @@
 ..\obj\crc_check.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\crc_check.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\crc_check.o: bootloader.h
-..\obj\crc_check.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\crc_check.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\crc_check.o: main.h
-..\obj\crc_check.o: ..\SYSTEM\usart\usart.h
-..\obj\crc_check.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\obj\crc_check.o: ..\SYSTEM\sys\sys.h
-..\obj\crc_check.o: ..\SYSTEM\usart\usart.h
-..\obj\crc_check.o: ..\SYSTEM\delay\delay.h
-..\obj\crc_check.o: ..\SYSTEM\sys\sys.h

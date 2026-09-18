@@ -564,11 +564,11 @@ ARM Macro Assembler    Page 9
               00000200 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=..\obj\startup_stm32f10x_hd.d -o..\obj\startup_stm32f10x_hd.o -IC:
-\Users\jing\AppData\Local\Arm\Packs\GigaDevice\GD32F10x_DFP\2.0.2\Device\Includ
-e --predefine="__UVISION_VERSION SETA 538" --predefine="GD32F10X_MD SETA 1" --p
-redefine="USE_STDPERIPH_DRIVER SETA 1" --list=.\listings\startup_stm32f10x_hd.l
-st ..\CORE\startup_stm32f10x_hd.s
+ork --depend=..\obj\startup_stm32f10x_hd.d -o..\obj\startup_stm32f10x_hd.o -ID:
+\Users\1\AppData\Local\Arm\Packs\GigaDevice\GD32F10x_DFP\2.0.2\Device\Include -
+-predefine="__UVISION_VERSION SETA 541" --predefine="GD32F10X_MD SETA 1" --pred
+efine="USE_STDPERIPH_DRIVER SETA 1" --list=.\listings\startup_stm32f10x_hd.lst 
+..\CORE\startup_stm32f10x_hd.s
 
 
 

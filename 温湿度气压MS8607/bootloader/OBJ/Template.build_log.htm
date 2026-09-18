@@ -3,110 +3,44 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¶ÃVision V5.38.0.0
-Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: JI jing, JI, LIC=D0D7S-L92PZ-JJF6S-LBX1B-SR47X-0NXUJ
+IDE-Version: ¶ÃVision V5.41.0.0
+Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 1, 1, LIC=76F5U-SCNSY-Y8IFK-ZJNB6-EIBF4-E65SK
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
-Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 5 (build 528)
-Assembler:       Armasm.exe V5.06 update 5 (build 528)
-Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
-Library Manager: ArmAr.exe V5.06 update 5 (build 528)
-Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
-CPU DLL:         SARMCM3.DLL V5.38.0.0
+Toolchain:       MDK-ARM Plus  Version: 5.41.0.0
+Toolchain Path:  D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.41.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Target DLL:      CMSIS_AGDI.dll V1.33.21.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-G:\bootloader\Œ¬ ™∂»v6.0\bootloader\USER\Template.uvprojx
-Project File Date:  07/07/2026
+D:\github\temp2\Œ¬ ™∂»∆¯—πMS8607\bootloader\USER\Template.uvprojx
+Project File Date:  09/15/2026
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'Template'
-assembling startup_stm32f10x_hd.s...
-compiling main.c...
-rs485.h(31): warning:  #1-D: last line of file ends without a newline
-  	 
-main.c(241): warning:  #1-D: last line of file ends without a newline
-  }
-main.c(72): warning:  #177-D: variable "RCC_Clocks"  was declared but never referenced
-      RCC_ClocksTypeDef  RCC_Clocks;      // Êó∂ÈíüÈÖçÁΩÆÁªìÊûÑ‰Ω?
-main.c: 3 warnings, 0 errors
-compiling core_cm3.c...
-compiling sys.c...
-..\SYSTEM\sys\sys.c(45): warning:  #940-D: missing return statement at end of non-void function "boot_jump" 
-  }
-..\SYSTEM\sys\sys.c: 1 warning, 0 errors
-compiling misc.c...
-compiling boot_flag.c...
-compiling delay.c...
-compiling stm32f10x_it.c...
-compiling crc_check.c...
-crc_check.c(142): warning:  #223-D: function "Usart2_SendString" declared implicitly
-          Usart2_SendString("No CRC stored\n");
-crc_check.c(154): warning:  #223-D: function "Usart2_SendString" declared implicitly
-      Usart2_SendString(buf);
-crc_check.c: 2 warnings, 0 errors
-compiling rs485.c...
-rs485.h(31): warning:  #1-D: last line of file ends without a newline
-  	 
-rs485.c: 1 warning, 0 errors
-compiling bsp_clkconfig.c...
-compiling bootloader.c...
-bootloader.c(72): warning:  #223-D: function "Usart2_SendString" declared implicitly
-          Usart2_SendString("Invalid stack pointer\n");
-bootloader.c(76): warning:  #223-D: function "Usart2_SendString" declared implicitly
-      Usart2_SendString("Stack pointer valid\n");
-bootloader.c: 2 warnings, 0 errors
-compiling system_stm32f10x.c...
-compiling stm32f10x_adc.c...
-compiling usart.c...
-compiling stm32f10x_bkp.c...
-compiling ymodem.c...
-rs485.h(31): warning:  #1-D: last line of file ends without a newline
-  	 
-ymodem.c: 1 warning, 0 errors
-compiling stm32f10x_can.c...
-compiling stm32f10x_cec.c...
-compiling stm32f10x_crc.c...
-compiling stm32f10x_dac.c...
-compiling stm32f10x_dbgmcu.c...
-compiling stm32f10x_dma.c...
-compiling stm32f10x_exti.c...
-compiling stm32f10x_flash.c...
-compiling stm32f10x_fsmc.c...
-compiling stm32f10x_gpio.c...
-compiling stm32f10x_iwdg.c...
-compiling stm32f10x_pwr.c...
-compiling stm32f10x_i2c.c...
-compiling stm32f10x_rtc.c...
-compiling stm32f10x_rcc.c...
-compiling stm32f10x_sdio.c...
-compiling stm32f10x_spi.c...
-compiling stm32f10x_wwdg.c...
-compiling stm32f10x_usart.c...
-compiling stm32f10x_tim.c...
-linking...
-Program Size: Code=8180 RO-data=396 RW-data=72 ZI-data=4152  
-FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 10 Warning(s).
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
+Build target 'Template'
+"..\OBJ\Template.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: GigaDevice
                 http://gd32mcu.com/data/documents/pack/GigaDevice.GD32F10x_DFP.2.0.2.pack
-                GigaDevice.GD32F10x_DFP.2.0.2
+                GigaDevice::GD32F10x_DFP@2.0.2
                 GigaDevice GD32F10x Series Device Support and Examples
 
 <h2>Collection of Component include folders:</h2>
-  C:/Users/jing/AppData/Local/Arm/Packs/GigaDevice/GD32F10x_DFP/2.0.2/Device/Include
+  D:/Users/1/AppData/Local/Arm/Packs/GigaDevice/GD32F10x_DFP/2.0.2/Device/Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

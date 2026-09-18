@@ -1,9 +1,9 @@
 ..\obj\bootloader.o: bootloader.c
 ..\obj\bootloader.o: bootloader.h
-..\obj\bootloader.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\bootloader.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\bootloader.o: stm32f10x.h
 ..\obj\bootloader.o: ..\CORE\core_cm3.h
-..\obj\bootloader.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\bootloader.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\bootloader.o: system_stm32f10x.h
 ..\obj\bootloader.o: stm32f10x_conf.h
 ..\obj\bootloader.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -33,7 +33,7 @@
 ..\obj\bootloader.o: main.h
 ..\obj\bootloader.o: crc_check.h
 ..\obj\bootloader.o: ..\SYSTEM\usart\usart.h
-..\obj\bootloader.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\bootloader.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\bootloader.o: ..\SYSTEM\sys\sys.h
 ..\obj\bootloader.o: ..\SYSTEM\usart\usart.h
 ..\obj\bootloader.o: ..\SYSTEM\delay\delay.h

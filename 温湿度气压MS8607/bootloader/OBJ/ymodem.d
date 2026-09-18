@@ -1,9 +1,9 @@
 ..\obj\ymodem.o: ymodem.c
 ..\obj\ymodem.o: ymodem.h
-..\obj\ymodem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\ymodem.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\ymodem.o: stm32f10x.h
 ..\obj\ymodem.o: ..\CORE\core_cm3.h
-..\obj\ymodem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\ymodem.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\ymodem.o: system_stm32f10x.h
 ..\obj\ymodem.o: stm32f10x_conf.h
 ..\obj\ymodem.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -31,7 +31,7 @@
 ..\obj\ymodem.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\ymodem.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\ymodem.o: ..\SYSTEM\usart\usart.h
-..\obj\ymodem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\ymodem.o: D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\ymodem.o: ..\SYSTEM\sys\sys.h
 ..\obj\ymodem.o: ..\SYSTEM\usart\usart.h
 ..\obj\ymodem.o: ..\SYSTEM\delay\delay.h
