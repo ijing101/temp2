@@ -4,8 +4,9 @@ namespace test.Services;
 
 public sealed class FirmwareUpgradeService
 {
-    private readonly YmodemSender _ymodemSender = new();
-
-    public Task UpgradeWithYmodemAsync(Stream serialStream, string firmwarePath, IProgress<int>? progress, CancellationToken cancellationToken)
-        => _ymodemSender.SendAsync(serialStream, firmwarePath, progress, cancellationToken);
+    public Task UpgradeWithYmodemAsync(DeviceService device, string firmwarePath, IProgress<int>? progress, CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(device);
+        return device.UpgradeWithYmodemAsync(firmwarePath, progress, cancellationToken);
+    }
 }

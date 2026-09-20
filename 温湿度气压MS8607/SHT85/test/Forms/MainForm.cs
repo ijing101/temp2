@@ -45,6 +45,7 @@ public partial class MainForm : Form
         btnEnterBoot.Click += btnEnterBoot_Click;
         btnSelectFirmware.Click += btnSelectFirmware_Click;
         btnStartFirmware.Click += btnStartFirmware_Click;
+        btnCancelFirmware.Click += btnCancelFirmware_Click;
         chkAutoRefresh.CheckedChanged += chkAutoRefresh_CheckedChanged;
         numRefreshInterval.ValueChanged += numRefreshInterval_ValueChanged;
         uiTimer.Tick += uiTimer_Tick;
@@ -451,11 +452,13 @@ public partial class MainForm : Form
 
         SetFirmwareUpgradeRunning(true);
         _logService.Info("正在升级固件。");
+        var closePortAfterFailure = false;
+        Exception? upgradeFailure = null;
 
         try
         {
             await _firmwareUpgradeService.UpgradeWithYmodemAsync(
-                _deviceService.BaseStream,
+                _deviceService,
                 txtFirmwarePath.Text,
                 progress,
                 _firmwareUpgradeCancellation.Token);
@@ -483,27 +486,56 @@ public partial class MainForm : Form
         }
         catch (OperationCanceledException)
         {
+            closePortAfterFailure = true;
             _logService.Info("固件升级已取消。");
         }
         catch (Exception ex)
         {
+            closePortAfterFailure = true;
+            upgradeFailure = ex;
             _logService.Info("固件升级失败。");
-            MessageBox.Show(ex.Message, "固件升级失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
+            if (closePortAfterFailure && _deviceService.IsPortOpen)
+            {
+                try
+                {
+                    _deviceService.ClosePort();
+                    UpdateConnectionState(false);
+                    _logService.Info("升级已中止，串口已关闭。请检查通信线后重新打开串口。");
+                }
+                catch (Exception ex)
+                {
+                    _logService.Info($"升级中止后关闭串口失败：{ex.Message}");
+                }
+            }
+
             _firmwareUpgradeCancellation.Dispose();
             _firmwareUpgradeCancellation = null;
             _firmwareTransferComplete = false;
             SetFirmwareUpgradeRunning(false);
             UpdateFirmwareUpgradeUi();
             UpdateRefreshTimer();
+            if (upgradeFailure is not null)
+            {
+                MessageBox.Show(upgradeFailure.Message, "固件升级失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             if (_closeAfterFirmwareCancel)
             {
                 _closeAfterFirmwareCancel = false;
                 Close();
             }
         }
+    }
+
+    private void btnCancelFirmware_Click(object? sender, EventArgs e)
+    {
+        if (_firmwareUpgradeCancellation is null || _firmwareTransferComplete) return;
+
+        btnCancelFirmware.Enabled = false;
+        _logService.Info("正在取消固件升级并等待串口操作结束。请勿断电。");
+        _firmwareUpgradeCancellation.Cancel();
     }
 
     private void PollDeviceData(bool showSuccessLog = false)
@@ -741,6 +773,7 @@ public partial class MainForm : Form
         // 固件可以在未连接设备时提前选择，便于 BOOT 设备直接升级。
         btnSelectFirmware.Enabled = !isUpgrading;
         btnStartFirmware.Enabled = isConnected && isBootMode && hasFirmware && !isUpgrading;
+        btnCancelFirmware.Enabled = isUpgrading && !_firmwareTransferComplete;
         txtFirmwarePath.Enabled = !isUpgrading;
     }
 

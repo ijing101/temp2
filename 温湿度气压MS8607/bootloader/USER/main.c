@@ -6,6 +6,7 @@
 
 #define WAIT_TIMEOUT_SECONDS 1U
 #define UPDATE_TIMEOUT_TICKS 200U
+#define UPDATE_INACTIVITY_TICKS 10U
 
 static uint8_t active_image_valid(boot_metadata_t *metadata)
 {
@@ -148,10 +149,12 @@ int main(void)
     uint8_t start_app;
     uint16_t wait_ticks;
     uint16_t update_timeout;
+    uint8_t transfer_idle_ticks;
     uint8_t trial_write_ok;
 
     wait_ticks = WAIT_TIMEOUT_SECONDS;
     update_timeout = 0U;
+    transfer_idle_ticks = 0U;
     start_app = 0U;
 
     HSE_SetSysClock(RCC_PLLMul_4);
@@ -350,6 +353,35 @@ int main(void)
                 if (ymodem.status == 0U)
                 {
                     ymodem_c();
+                }
+
+                /*
+                 * A disconnected host can leave the receiver after block 0
+                 * (ymodem.status == 1), where sending 'C' would otherwise be
+                 * suppressed to protect a live 1K packet. After five seconds
+                 * with no receive activity, abandon only the incomplete
+                 * transfer. BOOT metadata and the confirmed backup remain
+                 * untouched, then the next loop resumes advertising 'C'.
+                 */
+                if (ymodem.status != 0U)
+                {
+                    if (ymodem_take_rx_activity())
+                    {
+                        transfer_idle_ticks = 0U;
+                        update_timeout = 0U;
+                    }
+                    else if (++transfer_idle_ticks >= UPDATE_INACTIVITY_TICKS)
+                    {
+                        ymodem_abort_transfer();
+                        transfer_idle_ticks = 0U;
+                        update_timeout = 0U;
+                        ymodem_c();
+                    }
+                }
+                else
+                {
+                    transfer_idle_ticks = 0U;
+                    (void)ymodem_take_rx_activity();
                 }
                 delay_ms(500);
                 update_timeout++;

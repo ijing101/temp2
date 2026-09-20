@@ -8,6 +8,7 @@ namespace test.Communication;
 public sealed class SerialPortService : IDisposable
 {
     private readonly object _syncRoot = new();
+    private readonly YmodemSender _ymodemSender = new();
     private SerialPort? _serialPort;
 
     public bool IsOpen => _serialPort?.IsOpen == true;
@@ -167,6 +168,40 @@ public sealed class SerialPortService : IDisposable
             port.DiscardInBuffer();
             port.DiscardOutBuffer();
         }
+    }
+
+    /// <summary>
+    /// 独占串口执行 YMODEM。使用 SerialPort 的有限 ReadTimeout，而不是可能在
+    /// 通信线断开时长期挂起的 BaseStream.ReadAsync。
+    /// </summary>
+    public Task SendYmodemAsync(string firmwarePath, IProgress<int>? progress, CancellationToken cancellationToken)
+    {
+        return Task.Run(() =>
+        {
+            lock (_syncRoot)
+            {
+                var port = GetOpenPort();
+                var originalReadTimeout = port.ReadTimeout;
+                var originalWriteTimeout = port.WriteTimeout;
+                try
+                {
+                    // Every read wakes at most after 200 ms to observe cancellation.
+                    port.ReadTimeout = 200;
+                    port.WriteTimeout = 1500;
+                    port.DiscardInBuffer();
+                    port.DiscardOutBuffer();
+                    _ymodemSender.Send(port, firmwarePath, progress, cancellationToken);
+                }
+                finally
+                {
+                    if (port.IsOpen)
+                    {
+                        port.ReadTimeout = originalReadTimeout;
+                        port.WriteTimeout = originalWriteTimeout;
+                    }
+                }
+            }
+        });
     }
 
     public void Close()

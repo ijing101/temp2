@@ -97,6 +97,7 @@ partial class MainForm
     private TableLayoutPanel flowFirmwareActions = null!;
     private Button btnEnterBoot = null!;
     private Button btnStartFirmware = null!;
+    private Button btnCancelFirmware = null!;
     #endregion
 
     // ==================== 实时监控、采集控制和日志区域 ====================
@@ -221,6 +222,7 @@ partial class MainForm
         flowFirmwareActions = new TableLayoutPanel();
         btnEnterBoot = new Button();
         btnStartFirmware = new Button();
+        btnCancelFirmware = new Button();
         grpDataMonitoring = new GroupBox();
         tblMetrics = new TableLayoutPanel();
         cardTemperature = new MetricCard("温度", "℃", Color.FromArgb(220, 38, 38));
@@ -627,24 +629,27 @@ partial class MainForm
         progressFirmware.Name = "progressFirmware";
         progressFirmware.Style = ProgressBarStyle.Continuous;
 
-        flowFirmwareActions.ColumnCount = 2;
-        flowFirmwareActions.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        flowFirmwareActions.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        flowFirmwareActions.ColumnCount = 3;
+        flowFirmwareActions.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.333F));
+        flowFirmwareActions.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.333F));
+        flowFirmwareActions.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.334F));
         flowFirmwareActions.RowCount = 1;
         flowFirmwareActions.RowStyles.Clear();
         flowFirmwareActions.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
         flowFirmwareActions.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
         flowFirmwareActions.Controls.Add(btnEnterBoot, 0, 0);
         flowFirmwareActions.Controls.Add(btnStartFirmware, 1, 0);
+        flowFirmwareActions.Controls.Add(btnCancelFirmware, 2, 0);
         // 操作栏仅横向拉伸；高度固定，不能随固件区域或窗口高度增长。
         flowFirmwareActions.Dock = DockStyle.Top;
         flowFirmwareActions.Height = 44;
         flowFirmwareActions.Margin = new Padding(0);
         flowFirmwareActions.Name = "flowFirmwareActions";
         flowFirmwareActions.Padding = new Padding(0, 8, 0, 0);
-        // 固件操作使用两等分网格，始终保持单行并铺满升级区域。
+        // 固件操作使用三等分网格，始终保持单行并铺满升级区域。
         ConfigureButton(btnEnterBoot, "btnEnterBoot", "切换BOOT", Color.FromArgb(217, 119, 6));
         ConfigureButton(btnStartFirmware, "btnStartFirmware", "升级", Color.FromArgb(124, 58, 237));
+        ConfigureButton(btnCancelFirmware, "btnCancelFirmware", "取消升级", Color.FromArgb(185, 28, 28));
         btnEnterBoot.Font = new Font("Segoe UI", 8F);
         btnEnterBoot.AutoSize = false;//不根据文字自动调整按钮大小
         btnEnterBoot.Dock = DockStyle.Fill;//按钮填满它所在的父容器单元格
@@ -657,6 +662,13 @@ partial class MainForm
         btnStartFirmware.MinimumSize = new Size(0, 32);
         btnStartFirmware.Padding = new Padding(2, 0, 2, 0);
         btnStartFirmware.Margin = new Padding(2, 2, 2, 2);
+        btnCancelFirmware.Font = new Font("Segoe UI", 8F);
+        btnCancelFirmware.AutoSize = false;
+        btnCancelFirmware.Dock = DockStyle.Fill;
+        btnCancelFirmware.MinimumSize = new Size(0, 32);
+        btnCancelFirmware.Padding = new Padding(2, 0, 2, 0);
+        btnCancelFirmware.Margin = new Padding(2, 2, 2, 2);
+        btnCancelFirmware.Enabled = false;
         #endregion
 
         // ==================== 7. 实时监控区域（右侧上方） ====================

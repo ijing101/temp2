@@ -1,8 +1,11 @@
+using System.Diagnostics;
+using System.IO.Ports;
+
 namespace test.Communication;
 
 /// <summary>
 /// YMODEM 发送端：CRC16、Block 0 文件信息、1024 字节数据包、EOT 结束握手。
-/// 传入真实串口的 BaseStream 后即可用于 BOOT 程序升级。
+/// 所有读取均使用 SerialPort.ReadByte 的有限超时，避免通信线断开时异步读取长期挂起。
 /// </summary>
 public sealed class YmodemSender
 {
@@ -15,15 +18,19 @@ public sealed class YmodemSender
     private const byte CrcRequest = 0x43;
     private const int BlockSize = 1024;
     private const int HeaderBlockSize = 128;
+    private static readonly TimeSpan ResponseTimeout = TimeSpan.FromSeconds(3);
+    private const int PacketRetryCount = 3;
+
     // BOOT reserves one 21 KiB active slot and one 21 KiB rollback slot.
     public const long MaximumFirmwareSizeBytes = 0x5400 - 4;
 
-    public async Task SendAsync(Stream transport, string firmwarePath, IProgress<int>? progress, CancellationToken cancellationToken)
+    public void Send(SerialPort transport, string firmwarePath, IProgress<int>? progress, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(transport);
         ArgumentException.ThrowIfNullOrWhiteSpace(firmwarePath);
+        cancellationToken.ThrowIfCancellationRequested();
 
-        await using var firmware = File.OpenRead(firmwarePath);
+        using var firmware = File.OpenRead(firmwarePath);
         var totalBytes = firmware.Length;
         if (totalBytes == 0 || totalBytes > MaximumFirmwareSizeBytes)
         {
@@ -32,9 +39,9 @@ public sealed class YmodemSender
 
         try
         {
-            await WaitForAsync(transport, CrcRequest, cancellationToken);
-            await SendPacketWithRetryAsync(transport, 0, BuildHeader(FileName(firmwarePath), totalBytes), cancellationToken);
-            await WaitForAsync(transport, CrcRequest, cancellationToken);
+            WaitFor(transport, CrcRequest, cancellationToken);
+            SendPacketWithRetry(transport, 0, BuildHeader(FileName(firmwarePath), totalBytes), cancellationToken);
+            WaitFor(transport, CrcRequest, cancellationToken);
 
             var blockNumber = (byte)1;
             var buffer = new byte[BlockSize];
@@ -42,7 +49,8 @@ public sealed class YmodemSender
 
             while (true)
             {
-                var read = await firmware.ReadAsync(buffer.AsMemory(0, BlockSize), cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                var read = firmware.Read(buffer, 0, BlockSize);
                 if (read == 0) break;
 
                 if (read < BlockSize)
@@ -50,104 +58,115 @@ public sealed class YmodemSender
                     Array.Fill(buffer, (byte)0x1A, read, BlockSize - read);
                 }
 
-                await SendPacketWithRetryAsync(transport, blockNumber, buffer, cancellationToken);
+                SendPacketWithRetry(transport, blockNumber, buffer, cancellationToken);
                 sentBytes += read;
-                progress?.Report(totalBytes == 0 ? 100 : (int)(sentBytes * 100 / totalBytes));
+                progress?.Report((int)(sentBytes * 100 / totalBytes));
                 // 固件接收器使用 1..255 的包号并跳过 0，保持与现有协议兼容。
                 blockNumber = blockNumber == byte.MaxValue ? (byte)1 : (byte)(blockNumber + 1);
             }
 
-            await EndTransferAsync(transport, cancellationToken);
+            EndTransfer(transport, cancellationToken);
             progress?.Report(100);
         }
         catch (OperationCanceledException)
         {
-            await SendCancelAsync(transport);
+            SendCancel(transport);
             throw;
         }
-    }
-
-    private static async Task EndTransferAsync(Stream transport, CancellationToken cancellationToken)
-    {
-        await WriteControlAndExpectAsync(transport, Eot, Nak, cancellationToken);
-        await WriteControlAndExpectAsync(transport, Eot, Ack, cancellationToken);
-        await WaitForAsync(transport, CrcRequest, cancellationToken);
-        await SendPacketWithRetryAsync(transport, 0, new byte[HeaderBlockSize], cancellationToken);
-    }
-
-    private static async Task SendPacketWithRetryAsync(Stream transport, byte blockNumber, byte[] data, CancellationToken cancellationToken)
-    {
-        for (var attempt = 0; attempt < 10; attempt++)
+        catch (IOException ex)
         {
-            var packet = BuildPacket(blockNumber, data);
-            await transport.WriteAsync(packet, cancellationToken);
-            await transport.FlushAsync(cancellationToken);
+            throw new IOException("YMODEM 通信已中断或设备无响应。请检查 RS-485 通信线和设备供电，然后重新进入 BOOT 升级。", ex);
+        }
+    }
 
-            var response = await ReadStageResponseAsync(transport, Ack, cancellationToken);
+    private static void EndTransfer(SerialPort transport, CancellationToken cancellationToken)
+    {
+        WriteControlAndExpect(transport, Eot, Nak, cancellationToken);
+        WriteControlAndExpect(transport, Eot, Ack, cancellationToken);
+        WaitFor(transport, CrcRequest, cancellationToken);
+        SendPacketWithRetry(transport, 0, new byte[HeaderBlockSize], cancellationToken);
+    }
+
+    private static void SendPacketWithRetry(SerialPort transport, byte blockNumber, byte[] data, CancellationToken cancellationToken)
+    {
+        var packet = BuildPacket(blockNumber, data);
+        for (var attempt = 0; attempt < PacketRetryCount; attempt++)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Write(transport, packet);
+
+            var response = ReadStageResponse(transport, Ack, cancellationToken);
             if (response == Ack) return;
-            if (response == Nak) continue;
+            // NAK: resend the same packet. Any other response is ignored by ReadStageResponse.
         }
 
-        throw new IOException("YMODEM 数据包重试次数已用尽。");
+        throw new IOException("YMODEM 数据包连续 3 次被设备拒绝。");
     }
 
-    private static async Task WriteControlAndExpectAsync(Stream transport, byte control, byte expected, CancellationToken cancellationToken)
+    private static void WriteControlAndExpect(SerialPort transport, byte control, byte expected, CancellationToken cancellationToken)
     {
-        await transport.WriteAsync(new[] { control }, cancellationToken);
-        await transport.FlushAsync(cancellationToken);
-        var response = await ReadStageResponseAsync(transport, expected, cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+        Write(transport, new[] { control });
+        var response = ReadStageResponse(transport, expected, cancellationToken);
         if (response != expected) throw new IOException($"YMODEM 结束握手失败：期望 0x{expected:X2}，收到 0x{response:X2}。");
     }
 
-    private static async Task WaitForAsync(Stream transport, byte expected, CancellationToken cancellationToken)
+    private static void WaitFor(SerialPort transport, byte expected, CancellationToken cancellationToken)
     {
-        var response = await ReadStageResponseAsync(transport, expected, cancellationToken);
+        var response = ReadStageResponse(transport, expected, cancellationToken);
         if (response != expected) throw new IOException($"YMODEM 握手失败：期望 0x{expected:X2}，收到 0x{response:X2}。");
     }
 
-    private static async Task<byte> ReadStageResponseAsync(Stream transport, byte expected, CancellationToken cancellationToken)
+    private static byte ReadStageResponse(SerialPort transport, byte expected, CancellationToken cancellationToken)
     {
-        using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeout.CancelAfter(TimeSpan.FromSeconds(10));
-        var buffer = new byte[1];
-        try
+        var timeout = Stopwatch.StartNew();
+        while (true)
         {
-            while (true)
+            cancellationToken.ThrowIfCancellationRequested();
+            int value;
+            try
             {
-                var read = await transport.ReadAsync(buffer.AsMemory(0, 1), timeout.Token);
-                if (read == 0) throw new IOException("YMODEM 通信流已关闭。");
-
-                var value = buffer[0];
-                if (value == Can) throw new IOException("接收端取消了 YMODEM 传输。");
-                if (value == Ack || value == Nak)
-                {
-                    if (value == expected) return value;
-                    if (expected == Ack && value == Nak) return value;
-                    continue;
-                }
-
-                // BOOT 固件会在 RS-485 上输出 ASCII 调试文本，并每 500 ms 重发 'C'。
-                // 文本不是协议响应；只接受本阶段需要的 C，其余字节继续扫描。
-                if (value == CrcRequest && expected == CrcRequest) return value;
+                value = transport.ReadByte();
             }
-        }
-        catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
-        {
-            throw new IOException("YMODEM 等待设备响应超时。");
+            catch (TimeoutException)
+            {
+                if (timeout.Elapsed >= ResponseTimeout)
+                {
+                    throw new IOException("YMODEM 等待设备响应超时（3 秒）。通信线可能已断开。");
+                }
+                continue;
+            }
+
+            if (value < 0) throw new IOException("YMODEM 串口通信流已关闭。");
+            if (value == Can) throw new IOException("接收端取消了 YMODEM 传输。");
+            if (value == Ack || value == Nak)
+            {
+                if (value == expected) return (byte)value;
+                if (expected == Ack && value == Nak) return (byte)value;
+                continue;
+            }
+
+            // BOOT 的启动文本不是 YMODEM 响应；仅接受当前阶段需要的 C。
+            if (value == CrcRequest && expected == CrcRequest) return (byte)value;
         }
     }
 
-    private static async Task SendCancelAsync(Stream transport)
+    private static void SendCancel(SerialPort transport)
     {
         try
         {
-            await transport.WriteAsync(new[] { Can, Can }, CancellationToken.None);
-            await transport.FlushAsync(CancellationToken.None);
+            // BOOT recognizes CAN during a transfer and immediately resumes its 'C' advertisement.
+            Write(transport, new[] { Can, Can });
         }
         catch
         {
-            // 取消时尽力向设备发送 CAN，不覆盖原始取消异常。
+            // A disconnected link cannot receive CAN; BOOT's inactivity timeout will recover it.
         }
+    }
+
+    private static void Write(SerialPort transport, byte[] data)
+    {
+        transport.Write(data, 0, data.Length);
     }
 
     private static byte[] BuildHeader(string fileName, long length)

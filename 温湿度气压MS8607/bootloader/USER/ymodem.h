@@ -66,6 +66,10 @@ process_status get_ymodem_status(void);
 void ymodem_start(ymodem_callback cb);
 void ymodem_recv(download_buf_t *p);
 void ymodem_reset_transfer(void);
+/* Abort an interrupted transfer without changing BOOT metadata or the backup. */
+void ymodem_abort_transfer(void);
+/* Returns whether any YMODEM receive byte arrived since the preceding call. */
+uint8_t ymodem_take_rx_activity(void);
 void ymodem_init(void);
 void ymodem_handle(void);
 void timer_init(void);

@@ -17,6 +17,7 @@ ymodem_t ymodem =
 download_buf_t recvBuf;
 static uint16_t rx_expected_len = 0;
 static volatile uint8_t rx_idle_ticks = 0;
+static volatile uint8_t rx_activity_since_check = 0;
 seq_queue_t rx_queue;
 
 void queue_initiate(seq_queue_t *Q)
@@ -113,6 +114,34 @@ void ymodem_reset_transfer(void)
     ymodem.received_size = 0;
     ymodem.expected_packet = 1;
     ymodem.sectors_size = 0;
+}
+
+void ymodem_abort_transfer(void)
+{
+    /*
+     * This is called from the main loop after a multi-second receive idle
+     * timeout. Keep BOOT_STATE_RECEIVING and the rollback image intact; only
+     * discard the incomplete YMODEM frame and return to the block-0 state.
+     */
+    __disable_irq();
+    queue_initiate(&rx_queue);
+    recvBuf.len = 0;
+    rx_expected_len = 0;
+    rx_idle_ticks = 0;
+    rx_activity_since_check = 0;
+    ymodem_reset_transfer();
+    __enable_irq();
+}
+
+uint8_t ymodem_take_rx_activity(void)
+{
+    uint8_t activity;
+
+    __disable_irq();
+    activity = rx_activity_since_check;
+    rx_activity_since_check = 0;
+    __enable_irq();
+    return activity;
 }
 
 static uint8_t header_packet_valid(download_buf_t *packet)
@@ -252,6 +281,16 @@ void ymodem_recv(download_buf_t *packet)
 
     if (packet == 0 || packet->len == 0U)
     {
+        return;
+    }
+
+    /* A host cancellation immediately returns BOOT to the block-0 state. */
+    if (packet->len == 1U &&
+        packet->data[0] == YMODEM_CA &&
+        ymodem.status != 0U)
+    {
+        ymodem_reset_transfer();
+        packet->len = 0;
         return;
     }
 
@@ -415,6 +454,7 @@ void ymodem_init(void)
     recvBuf.len = 0;
     rx_expected_len = 0;
     rx_idle_ticks = 0;
+    rx_activity_since_check = 0;
     ymodem_reset_transfer();
     ymodem.process = WAIT_START_PROGRAM;
 }
@@ -424,7 +464,13 @@ static uint16_t get_expected_ymodem_frame_length(uint8_t first_byte)
     switch (ymodem.status)
     {
         case 0:
+            return first_byte == YMODEM_SOH ? 133U : 0U;
+
         case 3:
+            if (first_byte == YMODEM_CA)
+            {
+                return 1U;
+            }
             return first_byte == YMODEM_SOH ? 133U : 0U;
 
         case 1:
@@ -440,6 +486,10 @@ static uint16_t get_expected_ymodem_frame_length(uint8_t first_byte)
             {
                 return 1U;
             }
+            if (first_byte == YMODEM_CA)
+            {
+                return 1U;
+            }
             return 0U;
 
         case 2:
@@ -450,6 +500,10 @@ static uint16_t get_expected_ymodem_frame_length(uint8_t first_byte)
             if (first_byte == YMODEM_SOH)
             {
                 return 133U;
+            }
+            if (first_byte == YMODEM_CA)
+            {
+                return 1U;
             }
             return 0U;
 
@@ -467,6 +521,7 @@ void USART2_IRQHandler(void)
         value = USART_ReceiveData(USART2);
         queue_append(&rx_queue, value);
         rx_idle_ticks = 0;
+        rx_activity_since_check = 1;
     }
 
     TIM3->CNT = 0;

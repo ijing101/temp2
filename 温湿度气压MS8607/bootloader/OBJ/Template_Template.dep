@@ -1,6 +1,6 @@
 Dependencies for Project 'Template', Target 'Template': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\main.c)(0x6AAC9FA0)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\USER -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart-ID:\Users\1\AppData\Local\Arm\Packs\GigaDevice\GD32F10x_DFP\2.0.2\Device\Include-D__UVISION_VERSION="541" -DGD32F10X_MD -DUSE_STDPERIPH_DRIVER -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x6AAF8CFE)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\USER -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart-ID:\Users\1\AppData\Local\Arm\Packs\GigaDevice\GD32F10x_DFP\2.0.2\Device\Include-D__UVISION_VERSION="541" -DGD32F10X_MD -DUSE_STDPERIPH_DRIVER -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\delay\delay.h)(0x6AA8D89C)
 I (..\SYSTEM\sys\sys.h)(0x6AA8D89C)
 I (..\USER\stm32f10x.h)(0x6AA8D89C)
@@ -34,7 +34,7 @@ I (..\STM32F10x_FWLib\inc\misc.h)(0x6AA8D89C)
 I (..\SYSTEM\usart\usart.h)(0x6AA8D89C)
 I (D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
-I (ymodem.h)(0x6AAB9FAA)
+I (ymodem.h)(0x6AAF8CFA)
 I (bootloader.h)(0x6AAB9FAA)
 I (main.h)(0x6AA8F5C3)
 I (crc_check.h)(0x6AAB9FAA)
@@ -208,8 +208,8 @@ I (..\SYSTEM\sys\sys.h)(0x6AA8D89C)
 I (..\SYSTEM\delay\delay.h)(0x6AA8D89C)
 F (.\bootloader.h)(0x6AAB9FAA)()
 F (.\main.h)(0x6AA8F5C3)()
-F (.\ymodem.c)(0x6AAB9FAA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\USER -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart-ID:\Users\1\AppData\Local\Arm\Packs\GigaDevice\GD32F10x_DFP\2.0.2\Device\Include-D__UVISION_VERSION="541" -DGD32F10X_MD -DUSE_STDPERIPH_DRIVER -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o ..\obj\ymodem.o --omf_browse ..\obj\ymodem.crf --depend ..\obj\ymodem.d)
-I (ymodem.h)(0x6AAB9FAA)
+F (.\ymodem.c)(0x6AAF8E14)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\USER -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart-ID:\Users\1\AppData\Local\Arm\Packs\GigaDevice\GD32F10x_DFP\2.0.2\Device\Include-D__UVISION_VERSION="541" -DGD32F10X_MD -DUSE_STDPERIPH_DRIVER -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o ..\obj\ymodem.o --omf_browse ..\obj\ymodem.crf --depend ..\obj\ymodem.d)
+I (ymodem.h)(0x6AAF8CFA)
 I (D:\Users\1\AppData\Local\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (stm32f10x.h)(0x6AA8D89C)
 I (..\CORE\core_cm3.h)(0x6AA8D89C)
@@ -248,7 +248,7 @@ I (bootloader.h)(0x6AAB9FAA)
 I (main.h)(0x6AA8F5C3)
 I (crc_check.h)(0x6AAB9FAA)
 I (rs485.h)(0x6AABAB28)
-F (.\ymodem.h)(0x6AAB9FAA)()
+F (.\ymodem.h)(0x6AAF8CFA)()
 F (.\crc_check.c)(0x6AAB9FAA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\USER -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart-ID:\Users\1\AppData\Local\Arm\Packs\GigaDevice\GD32F10x_DFP\2.0.2\Device\Include-D__UVISION_VERSION="541" -DGD32F10X_MD -DUSE_STDPERIPH_DRIVER -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o ..\obj\crc_check.o --omf_browse ..\obj\crc_check.crf --depend ..\obj\crc_check.d)
 I (crc_check.h)(0x6AAB9FAA)
 I (stm32f10x.h)(0x6AA8D89C)

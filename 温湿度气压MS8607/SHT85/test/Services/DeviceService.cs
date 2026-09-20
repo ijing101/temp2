@@ -61,6 +61,9 @@ public sealed class DeviceService : IDisposable
     public bool TryDetectBootloader(TimeSpan timeout, CancellationToken cancellationToken)
         => _serialPort.TryDetectBootloaderSignal(timeout, cancellationToken);
 
+    public Task UpgradeWithYmodemAsync(string firmwarePath, IProgress<int>? progress, CancellationToken cancellationToken)
+        => _serialPort.SendYmodemAsync(firmwarePath, progress, cancellationToken);
+
     public void SetPortBaudRate(int baudRate)
     {
         if (baudRate is not (9600 or 19200 or 115200))
