@@ -11,39 +11,39 @@
 #include "stdio.h"
 
 int main(void)
- {
-	SCB->VTOR = FLASH_BASE | 0x5000;
-	__enable_irq(); 
+{
+		SCB->VTOR = FLASH_BASE | 0x5000;
+		__enable_irq(); 
 
-	HSE_SetSysClock(RCC_PLLMul_4);  //8MHZ * 4 = 32MHZ
-	delay_init();
-	MS8607_IIC_Config();
-	uart_init(115200);//usart1
-	
-	Flash_Storage_Init();
-	IWDG_Init(6,2344); 
-	delay_ms(500);
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-
-	Modbus_uart2_init(9600);//默认9600
-	TIM3_Int_Init(1000-1,32-1);//modbus 1ms
-	TIM4_Int_Init(1000-1,32-1);//MMsec 1ms
-	Usart2_SendString("app V6.3\r\n");
-	delay_ms(100);
-	Modbus_Init();//初始化modbus
-iap_confirm_app_boot();//confirm trial APP
-	
-	while(1)
-	{
-		IWDG_Feed();
-		MS8607_ReadDate();
+		HSE_SetSysClock(RCC_PLLMul_4);  //8MHZ * 4 = 32MHZ
+		delay_init();
+		MS8607_IIC_Config();
+		uart_init(115200);//usart1
 		
-		IWDG_Feed();
-		Modbus_Event();
+		Flash_Storage_Init();
+		IWDG_Init(6,2344); 
+		delay_ms(500);
+		NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
-		delay_ms(50);
-	}
- }
+		Modbus_uart2_init(9600);//默认9600
+		TIM3_Int_Init(1000-1,32-1);//modbus 1ms
+		TIM4_Int_Init(1000-1,32-1);//MMsec 1ms
+		Usart2_SendString("app V6.4\r\n");
+		delay_ms(100);
+		Modbus_Init();//初始化modbus
+		iap_confirm_app_boot();//confirm trial APP
+		
+		while(1)
+		{
+			IWDG_Feed();
+			MS8607_ReadDate();
+			
+			IWDG_Feed();
+			Modbus_Event();
+
+			delay_ms(50);
+		}
+}
 
  
 

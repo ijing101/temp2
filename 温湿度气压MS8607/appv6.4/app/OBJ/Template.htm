@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\Template.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\Template.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Sep 18 10:38:13 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Sep 18 14:42:20 2026
 <BR><P>
 <H3>Maximum Stack Usage =        296 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -341,8 +341,8 @@ Global Symbols
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 </UL>
 
@@ -510,9 +510,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Storage_Save_Config
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_metadata
-<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Storage_Save_Config
 </UL>
 
 <P><STRONG><a name="[63]"></a>FLASH_GetBank1Status</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, stm32f10x_flash.o(i.FLASH_GetBank1Status))
@@ -520,9 +520,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6a]"></a>FLASH_Lock</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f10x_flash.o(i.FLASH_Lock))
-<BR><BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
+<BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Storage_Save_Config
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_metadata
-<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Storage_Save_Config
 </UL>
 
 <P><STRONG><a name="[6f]"></a>FLASH_PrefetchBufferCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_flash.o(i.FLASH_PrefetchBufferCmd))
@@ -551,9 +551,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[69]"></a>FLASH_Unlock</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f10x_flash.o(i.FLASH_Unlock))
-<BR><BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
+<BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Storage_Save_Config
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_metadata
-<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Storage_Save_Config
 </UL>
 
 <P><STRONG><a name="[60]"></a>FLASH_WaitForLastOperation</STRONG> (Thumb, 34 bytes, Stack size 4 bytes, stm32f10x_flash.o(i.FLASH_WaitForLastOperation))
@@ -561,9 +561,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_GetBank1Status
 </UL>
-<BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramWord
-<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramHalfWord
+<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramHalfWord
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ErasePage
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramWord
 </UL>
 
 <P><STRONG><a name="[68]"></a>Flash_Storage_CRC16</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, eeprom.o(i.Flash_Storage_CRC16))
@@ -689,11 +689,11 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[7b]"></a>IWDG_ReloadCounter</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_iwdg.o(i.IWDG_ReloadCounter))
-<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_metadata
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;trigger_iap_update
+<BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;trigger_iap_update
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_Func6
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Feed
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_metadata
 </UL>
 
 <P><STRONG><a name="[7e]"></a>IWDG_SetPrescaler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_iwdg.o(i.IWDG_SetPrescaler))
@@ -714,8 +714,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay1us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
 </UL>
 
 <P><STRONG><a name="[84]"></a>MS8607_I2C_SendACK</STRONG> (Thumb, 44 bytes, Stack size 4 bytes, ms8607.o(i.MS8607_I2C_SendACK))
@@ -723,8 +723,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay1us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
 </UL>
 
 <P><STRONG><a name="[85]"></a>MS8607_I2C_SendByte</STRONG> (Thumb, 58 bytes, Stack size 20 bytes, ms8607.o(i.MS8607_I2C_SendByte))
@@ -732,9 +732,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay1us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
 </UL>
 
 <P><STRONG><a name="[86]"></a>MS8607_I2C_Start</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, ms8607.o(i.MS8607_I2C_Start))
@@ -743,9 +743,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay1us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
 </UL>
 
 <P><STRONG><a name="[87]"></a>MS8607_I2C_Stop</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, ms8607.o(i.MS8607_I2C_Stop))
@@ -753,9 +753,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay1us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
 </UL>
 
 <P><STRONG><a name="[88]"></a>MS8607_I2C_WaitAck</STRONG> (Thumb, 90 bytes, Stack size 24 bytes, ms8607.o(i.MS8607_I2C_WaitAck))
@@ -764,9 +764,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay1us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_MS8607Cmd
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_PTPROM
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MS8607_ReadDate
 </UL>
 
 <P><STRONG><a name="[89]"></a>MS8607_IIC_Config</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, ms8607.o(i.MS8607_IIC_Config))
@@ -1335,9 +1335,9 @@ Global Symbols
 <P><STRONG><a name="[9c]"></a>trigger_iap_update</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, iap_trigger.o(i.trigger_iap_update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = trigger_iap_update &rArr; write_update_flag &rArr; write_metadata &rArr; FLASH_ProgramWord &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_ReloadCounter
+<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_ReloadCounter
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
 </UL>
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_Func6
 </UL>
@@ -1390,8 +1390,8 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_metadata_at
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iap_confirm_app_boot
+<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iap_confirm_app_boot
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
 </UL>
 
 <P><STRONG><a name="[c7]"></a>read_metadata_at</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, iap_trigger.o(i.read_metadata_at))
@@ -1413,30 +1413,30 @@ Local Symbols
 <P><STRONG><a name="[c4]"></a>write_metadata</STRONG> (Thumb, 192 bytes, Stack size 128 bytes, iap_trigger.o(i.write_metadata))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = write_metadata &rArr; FLASH_ProgramWord &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramWord
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_valid
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_metadata_at
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;crc32_bytes
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Unlock
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Unlock
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Lock
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ErasePage
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_ReloadCounter
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramWord
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_valid
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_metadata_at
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;crc32_bytes
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iap_confirm_app_boot
+<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iap_confirm_app_boot
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_update_flag
 </UL>
 
 <P><STRONG><a name="[cc]"></a>write_update_flag</STRONG> (Thumb, 116 bytes, Stack size 72 bytes, iap_trigger.o(i.write_update_flag))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = write_update_flag &rArr; write_metadata &rArr; FLASH_ProgramWord &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramWord
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Unlock
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Lock
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ErasePage
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ProgramWord
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_metadata
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_metadata
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;crc32_bytes
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Unlock
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Lock
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_ErasePage
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;trigger_iap_update
 </UL>

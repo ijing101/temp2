@@ -11,7 +11,7 @@ char buffer3[50];
 //128涓瘎瀛樺櫒
 u16 Reg[128];
 
-#define APP_VERSION     60063U
+#define APP_VERSION     60064U
 	/*
 	03只读
 	Reg[0]	温度	0.1°C
