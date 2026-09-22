@@ -1,4 +1,4 @@
-namespace test.Models;
+namespace SHT85.Models;
 
 public enum DeviceMode
 {

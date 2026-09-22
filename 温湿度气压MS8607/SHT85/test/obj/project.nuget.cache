@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NyAfOGwfBqo=",
+  "dgSpecHash": "Ay7+B46u6p0=",
   "success": true,
-  "projectFilePath": "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\test.csproj",
+  "projectFilePath": "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\SHT85.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\1\\.nuget\\packages\\runtime.android-arm.runtime.native.system.io.ports\\9.0.0\\runtime.android-arm.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
     "C:\\Users\\1\\.nuget\\packages\\runtime.android-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.android-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",

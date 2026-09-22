@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\test.csproj": {}
+    "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\SHT85.csproj": {}
   },
   "projects": {
-    "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\test.csproj": {
+    "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\SHT85.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\test.csproj",
+        "projectUniqueName": "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\SHT85.csproj",
         "projectName": "SHT85",
-        "projectPath": "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\test.csproj",
+        "projectPath": "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\SHT85.csproj",
         "packagesPath": "C:\\Users\\1\\.nuget\\packages\\",
         "outputPath": "D:\\github\\temp2\\温湿度气压MS8607\\SHT85\\test\\obj\\",
         "projectStyle": "PackageReference",

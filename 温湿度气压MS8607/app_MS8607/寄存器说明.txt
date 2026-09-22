@@ -17,7 +17,7 @@ MODBUS说明
 	Reg[12]
 	Reg[13]
 	Reg[14]
-	Reg[14] app版本
+	Reg[15] app版本
 
 	
 	06只写

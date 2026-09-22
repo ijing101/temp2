@@ -1,7 +1,7 @@
-using test.Communication;
-using test.Models;
+using SHT85.Communication;
+using SHT85.Models;
 
-namespace test.Services;
+namespace SHT85.Services;
 
 /// <summary>实际设备服务：把设备寄存器映射为界面使用的配置和测量值。</summary>
 public sealed class DeviceService : IDisposable

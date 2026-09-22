@@ -5,6 +5,8 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>SHT85</AssemblyName>
+    <RootNamespace>SHT85</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
   </PropertyGroup>

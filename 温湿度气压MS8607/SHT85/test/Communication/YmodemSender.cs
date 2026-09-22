@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.IO.Ports;
 
-namespace test.Communication;
+namespace SHT85.Communication;
 
 /// <summary>
 /// YMODEM 发送端：CRC16、Block 0 文件信息、1024 字节数据包、EOT 结束握手。

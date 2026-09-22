@@ -1,8 +1,8 @@
 using System.IO.Ports;
 using System.Diagnostics;
-using test.Models;
+using SHT85.Models;
 
-namespace test.Communication;
+namespace SHT85.Communication;
 
 /// <summary>真实 RS-485 串口与 MODBUS RTU 传输层。</summary>
 public sealed class SerialPortService : IDisposable

@@ -1,6 +1,6 @@
-using test.Communication;
+using SHT85.Communication;
 
-namespace test.Services;
+namespace SHT85.Services;
 
 public sealed class FirmwareUpgradeService
 {

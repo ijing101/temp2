@@ -42,12 +42,12 @@
 
 ## 构建
 
-在 Windows 上安装 .NET 10 SDK 后，从 `test` 目录运行：
+在 Windows 上安装 .NET 10 SDK 后，进入上位机项目所在目录（当前文件夹仍为 `test`），运行：
 
 ```powershell
-dotnet restore
-dotnet build
-dotnet run
+dotnet restore SHT85.csproj
+dotnet build SHT85.csproj
+dotnet run --project SHT85.csproj
 ```
 
 项目使用 `System.IO.Ports` NuGet 包访问 Windows 串口。当前验证为本机编译；尚未连接实际设备验证串口、电气层及固件升级。

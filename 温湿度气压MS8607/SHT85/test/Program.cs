@@ -1,4 +1,4 @@
-namespace test;
+namespace SHT85;
 
 internal static class Program
 {

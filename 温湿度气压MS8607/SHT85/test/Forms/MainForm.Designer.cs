@@ -1,6 +1,6 @@
-using test.Controls;
+using SHT85.Controls;
 
-namespace test;
+namespace SHT85;
 
 partial class MainForm
 {
@@ -138,8 +138,6 @@ partial class MainForm
 
     private void InitializeComponent()
     {
-        // 注意：这是 WinForms 设计器文件。
-        // 学习时重点看“创建控件 → 设置属性 → 加入父容器”的顺序。
         // 业务逻辑请写在 MainForm.cs，避免设计器重新生成时被覆盖。
         components = new System.ComponentModel.Container();
 

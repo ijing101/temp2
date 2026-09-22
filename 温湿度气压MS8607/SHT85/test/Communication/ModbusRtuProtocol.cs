@@ -1,4 +1,4 @@
-namespace test.Communication;
+namespace SHT85.Communication;
 
 /// <summary>MODBUS RTU 功能码 0x03、0x06 报文构造和校验。</summary>
 public static class ModbusRtuProtocol

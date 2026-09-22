@@ -1,4 +1,4 @@
-namespace test.Controls;
+namespace SHT85.Controls;
 
 public sealed class MetricCard : Panel
 {

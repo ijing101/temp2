@@ -1,4 +1,4 @@
-namespace test.Models;
+namespace SHT85.Models;
 
 /// <summary>寄存器地址与编码来自项目根目录的《寄存器说明.txt》。</summary>
 public static class ModbusRegisterMap

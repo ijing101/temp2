@@ -1,9 +1,9 @@
 using System.Globalization;
-using test.Communication;
-using test.Models;
-using test.Services;
+using SHT85.Communication;
+using SHT85.Models;
+using SHT85.Services;
 
-namespace test;
+namespace SHT85;
 
 public partial class MainForm : Form
 {
@@ -806,7 +806,7 @@ public partial class MainForm : Form
 
     private void AppendRuntimeLog(string message)
     {
-        txtRuntimeLog.AppendText($"[{DateTime.Now:HH:mm:ss}] {message}{Environment.NewLine}");
+        txtRuntimeLog.AppendText($"{message}{Environment.NewLine}");
         txtRuntimeLog.ScrollToCaret();
     }
 
